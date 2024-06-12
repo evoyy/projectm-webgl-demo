@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <script async src="demo.js"></script>
+        <script async src="projectm.js"></script>
+    </head>
+
+    <body>
+        <div
+            id="container"
+            style="
+                aspect-ratio: 1.618;
+                background-color: black;
+                border: 1px solid #00ff4b;
+                box-sizing: border-box;
+                height: 90vh;
+                margin: 10px auto;
+            "></div>
+
+        <div style="text-align:center">
+            <button onclick="loadModule()" type="button">Load Module</button>
+            <button onclick="toggleVisualizer()" type="button">Toggle Visualizer</button>
+            <button onclick="enableAudio()" type="button">Enable Audio</button>
+            <button onclick="destruct()" type="button">Destruct</button>
+            <button onclick="cyclePresets()" type="button">Cycle Presets</button>
+        </div>
+    </body>
+</html>

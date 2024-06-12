@@ -49,6 +49,12 @@ int init() {
     // https://github.com/projectM-visualizer/projectm/blob/master/docs/emscripten.rst#initializing-emscriptens-opengl-context
     // https://emscripten.org/docs/api_reference/html5.h.html#c.emscripten_webgl_enable_extension
     emscripten_webgl_enable_extension(gl_ctx, "OES_texture_float");
+    // projectM uses half-float textures for the motion vector grid to store
+    // the displacement of the previous frame's warp mesh. WebGL 2.0 sadly
+    // doesn't support this texture format by default (while OpenGL ES 3 does)
+    // so we have to enable the following WebGL extensions.
+    emscripten_webgl_enable_extension(gl_ctx, "OES_texture_half_float");
+    emscripten_webgl_enable_extension(gl_ctx, "OES_texture_half_float_linear");
 
     pm = projectm_create();
 

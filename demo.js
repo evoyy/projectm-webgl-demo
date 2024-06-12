@@ -31,14 +31,6 @@ function createCanvas() {
     container.appendChild(canvas);
 }
 
-function cyclePresets() {
-    if (!pmModule) return;
-    //pmModule.loadPresetFile('presets/Martin - underwater cathedral.milk');  // RuntimeError
-    //pmModule.loadPresetFile('presets/martin - cope - laser dome.milk');
-    //pmModule.loadPresetFile('presets/martin - the forge of isengard.milk');
-    pmModule.loadPresetFile('presets/martin - castle in the air.milk');
-}
-
 function destruct() {
     if (!pmModule) return;
 
@@ -71,7 +63,16 @@ function loadModule() {
     });
 }
 
+function loadPreset() {
+    if (!pmModule) return;
+    //pmModule.loadPresetFile('presets/Martin - underwater cathedral.milk');  // RuntimeError
+    //pmModule.loadPresetFile('presets/martin - cope - laser dome.milk');
+    //pmModule.loadPresetFile('presets/martin - the forge of isengard.milk');
+    pmModule.loadPresetFile('presets/martin - castle in the air.milk');
+}
+
 function enableAudio() {
+    // already enabled
     if (audioBuffer) return;
 
     let audioContext = new AudioContext();
@@ -88,14 +89,6 @@ function enableAudio() {
 
     audio.loop = true;
     audio.play();
-
-    // Need to use a worklet to be able to decode samples from compressed audio.
-    // https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/createBuffer
-    //
-    //let channelCount = audioContext.destination.channelCount;
-    //let { sampleRate } = audioContext;
-    //let frameCount = sampleRate / 60; // TODO consider throttle factor
-    //audioBuffer = audioContext.createBuffer(channelCount, frameCount, sampleRate);
 
     analyser = audioContext.createAnalyser();
     analyser.fftSize = 256;  // pass 256 samples to projectM
@@ -124,3 +117,5 @@ function visualize() {
     addAudioData();
     pmModule.renderFrame();
 }
+
+document.addEventListener("DOMContentLoaded", loadModule);

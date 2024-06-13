@@ -20,6 +20,12 @@ After that you can build and serve the demo like this:
 
 Access the demo at http://127.0.0.1:8000/demo.html
 
+### Windows version 
+
+
+	build.bat && cd build && python -m http.server && cd ..
+
+
 ## Clean up
 
     unalias serve-dir

@@ -26,10 +26,12 @@ int init() {
     if (pm) return 0;
 
     // initialize WebGL context attributes
+    // https://emscripten.org/docs/api_reference/html5.h.html#c.EmscriptenWebGLContextAttributes
     EmscriptenWebGLContextAttributes webgl_attrs;
     emscripten_webgl_init_context_attributes(&webgl_attrs);
-    // TODO: configure WebGL
-    //webgl_attrs.antialias = ...;
+    //webgl_attrs.alpha = false;
+    webgl_attrs.majorVersion = 2;
+    webgl_attrs.minorVersion = 0;
 
     gl_ctx = emscripten_webgl_create_context("#my-canvas", &webgl_attrs);
 

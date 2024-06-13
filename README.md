@@ -10,7 +10,11 @@
 
 The demo will be built into the `build` directory. Serve this directory over HTTP and load `/demo.html` in a browser.
 
-As Python has the ability to serve a directory over HTTP from the command line, you can set up an alias to do this using the same docker image:
+Python has the ability to serve a directory over HTTP from the command line using
+
+    python -m http.server
+
+If you don't have python installed you can use the python in the docker image, setting an alias for convenience:
 
     alias serve-dir='docker run -t --rm -u $(id -u):$(id -g) -v $(pwd):/src --network=host projectm-emscripten-builder python3 -m http.server'
 

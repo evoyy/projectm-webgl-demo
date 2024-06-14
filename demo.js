@@ -3,6 +3,15 @@
 let _rAF, analyser, audioBuffer, canvas, pmModule;
 let isStopped = true;
 
+let presets = [
+    'martin - castle in the air',
+    'martin - cope - laser dome',
+    'martin - the forge of isengard',
+    //'Martin - underwater cathedral',  // RuntimeError
+];
+
+let presetIdx = 0;
+
 function addAudioData() {
     if (!audioBuffer) return;
 
@@ -29,6 +38,12 @@ function createCanvas() {
     canvas.height = height;
 
     container.appendChild(canvas);
+}
+
+function cyclePreset() {
+    if (!pmModule) return;
+    pmModule.loadPresetFile(`presets/${presets[presetIdx]}.milk`);
+    if (++presetIdx == presets.length) presetIdx = 0;
 }
 
 function destruct() {
@@ -61,14 +76,6 @@ function loadModule() {
         pmModule = module;
         console.log('module loaded');
     });
-}
-
-function loadPreset() {
-    if (!pmModule) return;
-    //pmModule.loadPresetFile('presets/Martin - underwater cathedral.milk');  // RuntimeError
-    //pmModule.loadPresetFile('presets/martin - cope - laser dome.milk');
-    //pmModule.loadPresetFile('presets/martin - the forge of isengard.milk');
-    pmModule.loadPresetFile('presets/martin - castle in the air.milk');
 }
 
 function enableAudio() {

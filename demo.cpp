@@ -47,6 +47,10 @@ int init() {
         return 1;
     }
 
+    // These are probably redundant since all GL extensions are enabled by default
+    // https://github.com/emscripten-core/emscripten/blob/1b01a9ef2b60184eb70616bbb294cf33d011bbb2/src/settings.js#L481
+    // https://emscripten.org/docs/api_reference/html5.h.html#c.EmscriptenWebGLContextAttributes.enableExtensionsByDefault
+    //
     // enable floating-point texture support for motion vector grid
     // https://github.com/projectM-visualizer/projectm/blob/master/docs/emscripten.rst#initializing-emscriptens-opengl-context
     // https://emscripten.org/docs/api_reference/html5.h.html#c.emscripten_webgl_enable_extension
@@ -90,7 +94,9 @@ void destruct() {
 
 void load_preset_file(std::string filename) {
     if (!pm) return;
-    projectm_load_preset_file(pm, filename.c_str(), true);
+    // XXX: smooth_transition true does not work
+    //projectm_load_preset_file(pm, filename.c_str(), true);
+    projectm_load_preset_file(pm, filename.c_str(), false);
 }
 
 void render_frame() {
